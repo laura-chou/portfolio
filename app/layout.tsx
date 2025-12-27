@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Providers } from "@/components/providers";
+import { Theme } from "@radix-ui/themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import '@/styles/base/_globals.scss';
 
@@ -34,7 +34,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>{children}</Providers>
+        <Theme>
+          {children}
+        </Theme>
       </body>
     </html>
   );
