@@ -4,6 +4,17 @@ html, body {
   margin: 0;
 }
 
-.parallax {
+.react-parallax {
   height: 400px;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      0deg,
+      rgba(80, 80, 80, 0.2),
+      rgba(15, 15, 15, 0.6)
+    );
+    pointer-events: none;
+  }
 }
