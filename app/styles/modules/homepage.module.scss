@@ -1,0 +1,38 @@
+.reactParallax {
+  height: 400px;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      0deg,
+      rgba(38, 54, 72, 0.5),
+      rgba(14, 20, 28, 0.75)
+    );
+    pointer-events: none;
+  }
+}
+
+.information {
+  width: 100%;
+  height: 400px;
+  position: absolute;
+  top: 0;
+
+  img {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.name {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.iconButton {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  bottom: -26px;
+}
