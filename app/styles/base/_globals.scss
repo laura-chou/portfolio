@@ -1,5 +1,18 @@
+@use '@/styles/base/variables' as *;
 @import "@radix-ui/themes/styles.css";
 
 html, body {
   margin: 0;
+  background-color: $background-color;
+  font-family: $font-family-default;
+}
+
+.title {
+  color: $title-font-color;
+  margin-bottom: 20px;
+}
+
+.content {
+  color: $content-font-color;
+  font-size: 19px;
 }

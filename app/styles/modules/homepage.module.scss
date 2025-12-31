@@ -36,3 +36,16 @@
   position: absolute;
   bottom: -26px;
 }
+
+.aboutMeSection {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    width: 400px;
+    text-align: center;
+    padding: 0 10px;
+  }
+}
