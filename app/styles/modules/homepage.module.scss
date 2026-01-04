@@ -42,10 +42,32 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 0;
 
   div {
     width: 400px;
     text-align: center;
     padding: 0 10px;
+  }
+}
+
+.jobExperienceSection {
+  padding: 0 20px;
+  padding-top: var(--space-9);
+}
+
+.cardStyle {
+  width: 500px;
+  margin-bottom: 10px;
+}
+
+.portfolioSection {
+  padding-bottom: 0;
+}
+
+
+@media (max-width: 600px) {
+  .cardStyle {
+    width: 100%;
   }
 }
