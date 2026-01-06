@@ -1,3 +1,5 @@
+@use '@/styles/base/variables' as *;
+
 .reactParallax {
   height: 400px;
   &::after {
@@ -65,6 +67,15 @@
   padding-bottom: 0;
 }
 
+.caretIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.jobTitle {
+  font-size: 15px;
+  color: $job-title-color;
+}
 
 @media (max-width: 600px) {
   .cardStyle {

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Parallax } from 'react-parallax';
 import { Collapsible } from "radix-ui";
 import { Button, Avatar, Flex, Text, IconButton, HoverCard, Heading, Section, Card } from '@radix-ui/themes';
-import { GitHubLogoIcon } from "@radix-ui/react-icons"
+import { GitHubLogoIcon, CaretUpIcon, CaretDownIcon } from "@radix-ui/react-icons"
 
 import styles from '@/styles/modules/homepage.module.scss';
 
@@ -30,10 +30,16 @@ const ExperienceItem = ({ company, department, role, period, details }: Experien
                   {department} <br />
                 </>
               )}
-              {role} {period}
+              <span className={styles.jobTitle}>{role} {period}</span>
             </Text>
             <Collapsible.Trigger asChild>
-              <Button variant="soft">{open ? "收合" : "展開"}</Button>
+              <Button variant="soft" radius="full">
+                {
+                  open
+                    ? <CaretUpIcon className={styles.caretIcon} />
+                    : <CaretDownIcon className={styles.caretIcon} />
+                }
+              </Button>
             </Collapsible.Trigger>
           </Flex>
           <Collapsible.Content>
