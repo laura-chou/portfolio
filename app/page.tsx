@@ -2,8 +2,10 @@
 import { useState } from "react";
 import { Parallax } from 'react-parallax';
 import { Collapsible } from "radix-ui";
-import { Button, Avatar, Flex, Text, IconButton, HoverCard, Heading, Section, Card } from '@radix-ui/themes';
+import { Tabs, Box, Button, Avatar, Flex, Text, IconButton, HoverCard, Heading, Section, Card } from '@radix-ui/themes';
 import { GitHubLogoIcon, CaretUpIcon, CaretDownIcon } from "@radix-ui/react-icons"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faJs, faNode, faVuejs, faReact } from '@fortawesome/free-brands-svg-icons'
 
 import styles from '@/styles/modules/homepage.module.scss';
 
@@ -149,6 +151,40 @@ export default function Home() {
       <Section className={styles.portfolioSection}>
         <div>
           <Heading className="title">作品集</Heading>
+          <Tabs.Root className={styles.tabsRoot} defaultValue="js">
+            <Tabs.List color="orange">
+              <Tabs.Trigger className={styles.tabTrigger} value="js">
+                <FontAwesomeIcon icon={faJs} size="2x"/>
+              </Tabs.Trigger>
+              <Tabs.Trigger className={styles.tabTrigger} value="node">
+                <FontAwesomeIcon icon={faNode} size="2x"/>
+              </Tabs.Trigger>
+              <Tabs.Trigger className={styles.tabTrigger} value="vue">
+                <FontAwesomeIcon icon={faVuejs} size="2x"/>
+              </Tabs.Trigger>
+              <Tabs.Trigger className={styles.tabTrigger} value="react">
+                <FontAwesomeIcon icon={faReact} size="2x"/>
+              </Tabs.Trigger>
+            </Tabs.List>
+
+            <Box pt="3">
+              <Tabs.Content value="js">
+                <Text size="2">js</Text>
+              </Tabs.Content>
+
+              <Tabs.Content value="node">
+                <Text size="2">node</Text>
+              </Tabs.Content>
+
+              <Tabs.Content value="vue">
+                <Text size="2">vue</Text>
+              </Tabs.Content>
+
+              <Tabs.Content value="react">
+                <Text size="2">react</Text>
+              </Tabs.Content>
+            </Box>
+          </Tabs.Root>
         </div>
       </Section>
     </>
