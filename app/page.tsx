@@ -2,10 +2,11 @@
 import { useState } from "react";
 import { Parallax } from 'react-parallax';
 import { Collapsible } from "radix-ui";
-import { Tabs, Box, Button, Avatar, Flex, Text, IconButton, HoverCard, Heading, Section, Card } from '@radix-ui/themes';
+import { Tabs, Box, Button, Avatar, Flex, Text, IconButton, HoverCard, Heading, Section, Card, Link } from '@radix-ui/themes';
 import { GitHubLogoIcon, CaretUpIcon, CaretDownIcon } from "@radix-ui/react-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faJs, faNode, faVuejs, faReact } from '@fortawesome/free-brands-svg-icons'
+import { faPalette } from '@fortawesome/free-solid-svg-icons'
 
 import styles from '@/styles/modules/homepage.module.scss';
 
@@ -106,8 +107,9 @@ export default function Home() {
                 <li>串接外部系統API</li>
                 <li>Git版本控管</li>
               </ul>
-              <h4>專案經歷：</h4>
-              <p>（可補充具體專案名稱與成果）</p>
+              <Link href="/projects">
+                專案經歷
+              </Link>
             </>
           }
         />
@@ -115,7 +117,7 @@ export default function Home() {
           company="凡達科技有限公司"
           department=""
           role="軟體工程師"
-          period="1 年半"
+          period="1 年半以上"
           details={
             <>
               <ul>
@@ -125,8 +127,9 @@ export default function Home() {
                 <li>資料庫規劃</li>
                 <li>技術文件撰寫</li>
               </ul>
-              <h4>專案經歷：</h4>
-              <p>（可補充具體專案名稱與成果）</p>
+              <Link href="/projects">
+                專案經歷
+              </Link>
             </>
           }
         />
@@ -142,8 +145,9 @@ export default function Home() {
                 <li>python 爬蟲</li>
                 <li>python 機器人開發</li>
               </ul>
-              <h4>專案經歷：</h4>
-              <p>（可補充具體專案名稱與成果）</p>
+              <Link href="/projects">
+                專案經歷
+              </Link>
             </>
           }
         />
@@ -165,6 +169,9 @@ export default function Home() {
               <Tabs.Trigger className={styles.tabTrigger} value="react">
                 <FontAwesomeIcon icon={faReact} size="2x"/>
               </Tabs.Trigger>
+              <Tabs.Trigger className={styles.tabTrigger} value="design">
+                <FontAwesomeIcon icon={faPalette} size="2x"/>
+              </Tabs.Trigger>
             </Tabs.List>
 
             <Box pt="3">
@@ -182,6 +189,10 @@ export default function Home() {
 
               <Tabs.Content value="react">
                 <Text size="2">react</Text>
+              </Tabs.Content>
+
+              <Tabs.Content value="design">
+                <Text size="2">design</Text>
               </Tabs.Content>
             </Box>
           </Tabs.Root>
