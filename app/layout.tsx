@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Theme } from "@radix-ui/themes";
 import { Geist, Geist_Mono } from "next/font/google";
-import '@/styles/base/_globals.scss';
+import './globals.css';
+import { RightNav } from '@/components/RightNav';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,11 +32,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <link rel="manifest" href="/icon/site.webmanifest" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-content`}
       >
-        <Theme>
-          {children}
-        </Theme>
+        <div className="relative min-h-screen">
+          <RightNav />
+          <main>
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );
