@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { Theme } from "@radix-ui/themes";
 import { Geist, Geist_Mono } from "next/font/google";
-import './globals.css';
-import { RightNav } from '@/components/RightNav';
+import "@radix-ui/themes/styles.css";
+import '@/styles/base/_globals.scss';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Laura's Portfolio",
+  title: "Yu Lun Chou's Portfolio",
   description: "Welcome to my personal portfolio website!",
 };
 
@@ -32,14 +33,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <link rel="manifest" href="/icon/site.webmanifest" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-content`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="relative min-h-screen">
-          <RightNav />
-          <main>
-            {children}
-          </main>
-        </div>
+        <Theme accentColor="orange">
+          {children}
+        </Theme>
       </body>
     </html>
   );

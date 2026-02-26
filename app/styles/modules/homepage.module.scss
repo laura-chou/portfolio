@@ -1,0 +1,91 @@
+@use '@/styles/base/variables' as *;
+
+.reactParallax {
+  height: 400px;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      0deg,
+      rgba(38, 54, 72, 0.5),
+      rgba(14, 20, 28, 0.75)
+    );
+    pointer-events: none;
+  }
+}
+
+.information {
+  width: 100%;
+  height: 400px;
+  position: absolute;
+  top: 0;
+
+  img {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.name {
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.iconButton {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  bottom: -26px;
+}
+
+.aboutMeSection {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 0;
+
+  div {
+    width: 400px;
+    text-align: center;
+    padding: 0 10px;
+  }
+}
+
+.jobExperienceSection {
+  padding: 0 20px;
+  padding-top: var(--space-9);
+}
+
+.cardStyle {
+  width: 500px;
+  margin-bottom: 10px;
+}
+
+.portfolioSection {
+  padding-bottom: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.caretIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.jobTitle {
+  font-size: 15px;
+  color: $job-title-color;
+}
+
+.tabTrigger[data-state="active"] {
+  background: var(--accent-9);
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .cardStyle {
+    width: 100%;
+  }
+}
