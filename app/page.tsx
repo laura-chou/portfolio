@@ -109,7 +109,7 @@ export default function Home() {
                 <li>Git版本控管</li>
               </ul>
               <RadixLink asChild>
-                <Link href="/projects/flytech">專案經歷</Link>
+                <Link href="/projects/aircast">專案經歷</Link>
               </RadixLink>
             </>
           }
@@ -129,7 +129,7 @@ export default function Home() {
                 <li>技術文件撰寫</li>
               </ul>
               <RadixLink asChild>
-                <Link href="/projects/vanda">專案經歷</Link>
+                <Link href="/projects/fanda">專案經歷</Link>
               </RadixLink>
             </>
           }
@@ -147,7 +147,7 @@ export default function Home() {
                 <li>python 機器人開發</li>
               </ul>
               <RadixLink asChild>
-                <Link href="/projects/creation">專案經歷</Link>
+                <Link href="/projects/chuangshiyi">專案經歷</Link>
               </RadixLink>
             </>
           }
