@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faJs, faNode, faVuejs, faReact } from '@fortawesome/free-brands-svg-icons'
 import { faPalette } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link';
+import '@/styles/hero.css';
 
 type ExperienceItemProps = {
   company: string;
@@ -67,26 +68,23 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section id="hero" className="relative h-[500px] overflow-hidden">
+      <section id="hero">
         <Parallax
-          className="absolute inset-0 h-full w-full"
+          className="h-full w-full"
           bgImage="/bg.jpg"
           bgImageStyle={{ objectFit: 'cover', height: '100%', width: '100%' }}
           strength={300}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-900/70 to-gray-900/50" />
+          <div className="bg-gradient-to-b from-gray-900/70 to-gray-900/50" />
         </Parallax>
 
-        <div className="relative h-full flex flex-col items-center justify-center text-white px-4">
+        <div className="information">
           <Avatar.Root className="inline-flex items-center justify-center align-middle overflow-hidden select-none w-32 h-32 rounded-full border-4 border-white/30 shadow-2xl mb-6">
             <Avatar.Image
               className="w-full h-full object-cover"
               src="/me.jpg"
               alt="Yu Lun Chou"
             />
-            <Avatar.Fallback className="w-full h-full flex items-center justify-center bg-orange-500 text-3xl font-bold" delayMs={600}>
-              C
-            </Avatar.Fallback>
           </Avatar.Root>
 
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl mb-4 drop-shadow-md">
@@ -99,7 +97,7 @@ export default function Home() {
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-orange-500 hover:bg-orange-600 text-white p-4 rounded-full shadow-lg transition-all hover:scale-110 active:scale-95"
+                className="github bg-orange-500 hover:bg-orange-600 text-white p-4 rounded-full shadow-lg transition-all hover:scale-110 active:scale-95"
               >
                 <GitHubLogoIcon className="w-8 h-8" />
               </a>
@@ -120,7 +118,7 @@ export default function Home() {
 
       <div className="max-w-5xl mx-auto px-4 py-16 space-y-24 w-full">
         {/* About Me */}
-        <section id="about" className="scroll-mt-20">
+        <section id="about" className="mt-10 scroll-mt-20">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center justify-center gap-3">
               <span className="w-8 h-1 bg-orange-500 rounded-full"></span>

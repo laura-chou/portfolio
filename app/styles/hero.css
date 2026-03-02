@@ -1,0 +1,29 @@
+:root {
+  --hero-height: 500px;
+}
+
+#hero,
+.react-parallax-content div,
+.information {
+  height: var(--hero-height);
+}
+
+#hero {
+  overflow: hidden;
+}
+
+.information {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  position: absolute;
+  top: 0;
+}
+
+.github {
+  position: absolute;
+  bottom: -30px;
+}
