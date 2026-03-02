@@ -3,6 +3,7 @@
 import React from 'react';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import { HomeIcon, PersonIcon, BackpackIcon, Pencil2Icon } from '@radix-ui/react-icons';
+import { usePathname, useRouter } from 'next/navigation';
 
 const navItems = [
   { id: 'hero', icon: <HomeIcon />, label: '首頁' },
@@ -12,10 +13,17 @@ const navItems = [
 ];
 
 export const RightNav = () => {
-  const scrollTo = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const handleNavClick = (id: string) => {
+    if (pathname === '/') {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      router.push(`/#${id}`);
     }
   };
 
@@ -26,7 +34,7 @@ export const RightNav = () => {
           <Tooltip.Root key={item.id}>
             <Tooltip.Trigger asChild>
               <button
-                onClick={() => scrollTo(item.id)}
+                onClick={() => handleNavClick(item.id)}
                 className="p-3 rounded-full hover:bg-orange-100 text-gray-600 hover:text-orange-600 transition-colors"
                 aria-label={item.label}
               >
