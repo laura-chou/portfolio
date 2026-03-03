@@ -179,14 +179,14 @@ export default function IfantechProjects() {
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr className="bg-gray-50/50">
-                      <th className="px-6 py-3 text-sm font-bold text-gray-600 uppercase tracking-wider border-b border-gray-100 w-1/4">專案名稱</th>
-                      <th className="px-6 py-3 text-sm font-bold text-gray-600 uppercase tracking-wider border-b border-gray-100">專案描述</th>
+                      <th className="px-6 py-3 text-sm font-bold text-gray-600 uppercase tracking-wider border-b border-gray-100 w-1/4 text-center">專案名稱</th>
+                      <th className="px-6 py-3 text-sm font-bold text-gray-600 uppercase tracking-wider border-b border-gray-100 text-center">專案描述</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100">
                     {section.projects.map((project, pIdx) => (
                       <tr key={pIdx} className="hover:bg-gray-50/50 transition-colors">
-                        <td className="px-6 py-4 text-sm font-medium text-gray-900 align-top">{project.name}</td>
+                        <td className="px-6 py-4 text-sm font-medium text-gray-900 align-middle text-center">{project.name}</td>
                         <td className="px-6 py-4 text-sm text-gray-600">
                           <ul className="list-disc list-inside space-y-1">
                             {project.description.map((desc, dIdx) => (
