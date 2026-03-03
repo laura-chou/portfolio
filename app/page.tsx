@@ -148,9 +148,6 @@ export default function Home() {
                     <li>串接第三方金流API</li>
                     <li>Git版本控管</li>
                   </ul>
-                  <Link href="/projects/aircast" className="inline-flex items-center text-orange-600 font-bold hover:underline">
-                    查看專案經歷 →
-                  </Link>
                 </div>
               }
             />
