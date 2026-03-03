@@ -145,10 +145,10 @@ export default function Home() {
                   <ul className="list-disc list-inside space-y-1">
                     <li>.NET開發與維護系統排程及相關服務</li>
                     <li>軟體測試及維護</li>
-                    <li>串接外部系統API</li>
+                    <li>串接第三方金流API</li>
                     <li>Git版本控管</li>
                   </ul>
-                  <Link href="/projects" className="inline-flex items-center text-orange-600 font-bold hover:underline">
+                  <Link href="/projects/aircast" className="inline-flex items-center text-orange-600 font-bold hover:underline">
                     查看專案經歷 →
                   </Link>
                 </div>
@@ -168,7 +168,7 @@ export default function Home() {
                     <li>資料庫規劃</li>
                     <li>技術文件撰寫</li>
                   </ul>
-                  <Link href="/projects" className="inline-flex items-center text-orange-600 font-bold hover:underline">
+                  <Link href="/projects/ifantech" className="inline-flex items-center text-orange-600 font-bold hover:underline">
                     查看專案經歷 →
                   </Link>
                 </div>
@@ -186,7 +186,7 @@ export default function Home() {
                     <li>python 爬蟲</li>
                     <li>python 機器人開發</li>
                   </ul>
-                  <Link href="/projects" className="inline-flex items-center text-orange-600 font-bold hover:underline">
+                  <Link href="/projects/chuangshiyi" className="inline-flex items-center text-orange-600 font-bold hover:underline">
                     查看專案經歷 →
                   </Link>
                 </div>
