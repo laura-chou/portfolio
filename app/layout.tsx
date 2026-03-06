@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import '@/styles/globals.css';
-import { RightNav } from '@/components/RightNav';
+import { NavWrapper } from '@/components/NavWrapper';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +35,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-content`}
       >
         <div className="relative min-h-screen">
-          <RightNav />
+          <NavWrapper />
           <main>
             {children}
           </main>
