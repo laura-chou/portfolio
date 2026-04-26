@@ -44,32 +44,27 @@ export default function ChuangshiyiProjects() {
           <ArrowLeftIcon /> 回到首頁
         </Link>
 
-        <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">專案經歷</h1>
+        <div className="container mx-auto">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">
+            <b>Project experience</b>
+          </h3>
 
-        <div className="bg-white shadow-sm border border-gray-100 rounded-xl overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="bg-gray-50/50">
-                  <th className="px-6 py-3 text-sm font-bold text-gray-600 uppercase tracking-wider border-b border-gray-100 w-1/4 text-center">專案名稱</th>
-                  <th className="px-6 py-3 text-sm font-bold text-gray-600 uppercase tracking-wider border-b border-gray-100 text-center">專案描述</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100">
-                {projects.map((project, pIdx) => (
-                  <tr key={pIdx} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900 align-middle text-center">{project.name}</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">
-                      <ul className="list-disc list-inside space-y-1">
-                        {project.description.map((desc, dIdx) => (
-                          <li key={dIdx}>{desc}</li>
-                        ))}
-                      </ul>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="space-y-8">
+            {projects.map((project, pIdx) => (
+              <div key={pIdx} className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-gray-200">
+                <h5 className="text-lg font-bold text-gray-800 mb-2">
+                  <b>專案名稱：</b>{project.name}
+                </h5>
+                <h5 className="text-lg font-bold text-gray-800 mb-2">
+                  <b>專案描述：</b>
+                </h5>
+                <div className="space-y-1 text-gray-600">
+                  {project.description.map((desc, dIdx) => (
+                    <p key={dIdx}>{desc}</p>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

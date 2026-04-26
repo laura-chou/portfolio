@@ -81,6 +81,7 @@ export default function IfantechProjects() {
         },
         {
           name: '綠能科技產業推動中心',
+          link: 'https://www.geipc.tw/',
           description: [
             '綠能科技產業推動中心官網及後台管理',
             '負責專案改版及維護',
@@ -89,6 +90,7 @@ export default function IfantechProjects() {
         },
         {
           name: 'CDXO CLUB - 資策會',
+          link: 'https://cdxoclub.iii.org.tw/',
           description: [
             'CDXO CLUB 資策會官網及後台管理',
             '負責專案合作開發及維護',
@@ -148,6 +150,7 @@ export default function IfantechProjects() {
         },
         {
           name: '智網系統',
+          link: 'https://www.itis.org.tw/default.aspx',
           description: [
             '經濟部技術處產業技術基磐研究與知識服務計畫網站',
             '負責專案合作開發',
@@ -167,40 +170,56 @@ export default function IfantechProjects() {
           <ArrowLeftIcon /> 回到首頁
         </Link>
 
-        <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">專案經歷</h1>
+        <div className="container mx-auto">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">
+            <b>Project experience</b>
+          </h3>
 
-        <div className="space-y-12">
-          {sections.map((section, idx) => (
-            <div key={idx} className="bg-white shadow-sm border border-gray-100 rounded-xl overflow-hidden">
-              <div className="bg-gray-50 px-6 py-4 border-b border-gray-100">
-                <h2 className="text-lg font-bold text-gray-800">{section.title}</h2>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr className="bg-gray-50/50">
-                      <th className="px-6 py-3 text-sm font-bold text-gray-600 uppercase tracking-wider border-b border-gray-100 w-1/4 text-center">專案名稱</th>
-                      <th className="px-6 py-3 text-sm font-bold text-gray-600 uppercase tracking-wider border-b border-gray-100 text-center">專案描述</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-100">
-                    {section.projects.map((project, pIdx) => (
-                      <tr key={pIdx} className="hover:bg-gray-50/50 transition-colors">
-                        <td className="px-6 py-4 text-sm font-medium text-gray-900 align-middle text-center">{project.name}</td>
-                        <td className="px-6 py-4 text-sm text-gray-600">
-                          <ul className="list-disc list-inside space-y-1">
-                            {project.description.map((desc, dIdx) => (
-                              <li key={dIdx}>{desc}</li>
-                            ))}
-                          </ul>
-                        </td>
+          <div className="space-y-8">
+            {sections.map((section, idx) => (
+              <div key={idx} className="border-l-4 border-gray-200 pl-4 py-2">
+                <h5 className="text-lg font-bold text-gray-800 mb-4">{section.title}</h5>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-center border-collapse border border-gray-300">
+                    <thead className="bg-blue-100">
+                      <tr>
+                        <th className="border border-gray-300 p-2 text-gray-700 font-bold">專案名稱</th>
+                        <th className="border border-gray-300 p-2 text-gray-700 font-bold">專案描述</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {section.projects.map((project, pIdx) => (
+                        <tr key={pIdx}>
+                          <td className="border border-gray-300 p-2 text-gray-900 font-medium">
+                            {project.link ? (
+                              <a
+                                href={project.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-600 hover:underline"
+                              >
+                                {project.name}
+                              </a>
+                            ) : (
+                              project.name
+                            )}
+                          </td>
+                          <td className="border border-gray-300 p-2 text-left text-gray-600">
+                            {project.description.map((desc, dIdx) => (
+                              <div key={dIdx} className="flex items-start gap-2">
+                                <span>&#9679;</span>
+                                <span>{desc}</span>
+                              </div>
+                            ))}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
