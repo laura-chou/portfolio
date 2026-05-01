@@ -8,7 +8,7 @@ import * as Avatar from "@radix-ui/react-avatar";
 import * as HoverCard from "@radix-ui/react-hover-card";
 import { GitHubLogoIcon, CaretUpIcon, CaretDownIcon, ExternalLinkIcon } from "@radix-ui/react-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faJs, faNode, faVuejs, faReact, faAngular } from '@fortawesome/free-brands-svg-icons'
+import { faJs, faNode, faVuejs, faReact } from '@fortawesome/free-brands-svg-icons'
 import { faPalette, faCode } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link';
 import '@/styles/hero.css';
@@ -127,9 +127,6 @@ export default function Home() {
       { name: '人生好難 Bot', description: 'LINE 機器人，每天定時廣播一則語錄、小知識等訊息', link: 'https://github.com/laura-chou/life-is-hard-line-bot' },
       { name: '電影查詢機器人', description: 'LINE 機器人，可透過 LINE 搜尋電影資訊並回傳結果', link: 'https://github.com/laura-chou/movie-search-line-bot' },
       { name: '旅食住行查詢機器人', description: 'LINE 機器人，提供旅遊景點與相關資訊查詢', link: 'https://github.com/laura-chou/tourism-info-line-bot' },
-    ],
-    angular: [
-      { name: '待辦事項清單', description: '一個有增刪改功能的 Todo List', link: 'https://github.com/laura-chou/angular-todo-list' },
     ],
     js: [
       { name: '海洋主題時鐘', description: '一個以海洋風格為主題的時鐘網站，結合視覺設計與時間顯示功能', link: 'https://github.com/laura-chou/ocean-theme-clock' },
@@ -292,7 +289,6 @@ export default function Home() {
                 { value: 'node', icon: faNode },
                 { value: 'vue', icon: faVuejs },
                 { value: 'react', icon: faReact },
-                { value: 'angular', icon: faAngular },
                 { value: 'tdd', icon: faCode },
                 { value: 'design', icon: faPalette },
               ].map((tab) => (
@@ -318,9 +314,6 @@ export default function Home() {
               </Tabs.Content>
               <Tabs.Content value="react" className="outline-none animate-in fade-in duration-300">
                 <ProjectList projects={portfolioData.react} />
-              </Tabs.Content>
-              <Tabs.Content value="angular" className="outline-none animate-in fade-in duration-300">
-                <ProjectList projects={portfolioData.angular} />
               </Tabs.Content>
               <Tabs.Content value="tdd" className="outline-none animate-in fade-in duration-300">
                 <ProjectList projects={portfolioData.tdd} />
