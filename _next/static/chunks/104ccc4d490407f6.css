@@ -1,0 +1,1 @@
+:root{--hero-height:500px}#hero,.react-parallax-content div,.information{height:var(--hero-height)}#hero{overflow:hidden}.information{color:#fff;flex-direction:column;justify-content:center;align-items:center;width:100%;display:flex;position:absolute;top:0}.github{position:absolute;bottom:-30px}
