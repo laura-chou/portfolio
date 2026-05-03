@@ -81,7 +81,6 @@ export default function IfantechProjects() {
         },
         {
           name: '綠能科技產業推動中心',
-          link: 'https://www.geipc.tw/',
           description: [
             '綠能科技產業推動中心官網及後台管理',
             '負責專案改版及維護',
@@ -90,7 +89,6 @@ export default function IfantechProjects() {
         },
         {
           name: 'CDXO CLUB - 資策會',
-          link: 'https://cdxoclub.iii.org.tw/',
           description: [
             'CDXO CLUB 資策會官網及後台管理',
             '負責專案合作開發及維護',
@@ -150,7 +148,6 @@ export default function IfantechProjects() {
         },
         {
           name: '智網系統',
-          link: 'https://www.itis.org.tw/default.aspx',
           description: [
             '經濟部技術處產業技術基磐研究與知識服務計畫網站',
             '負責專案合作開發',
