@@ -158,7 +158,7 @@ export default function Home() {
       <section id="hero">
         <Parallax
           className="h-full w-full"
-          bgImage="/bg.jpg"
+          bgImage="/portfolio/bg.jpg"
           bgImageStyle={{ objectFit: 'cover', height: '100%', width: '100%' }}
           strength={300}
         >
