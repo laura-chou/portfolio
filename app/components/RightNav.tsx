@@ -2,13 +2,13 @@
 
 import React from 'react';
 import * as Tooltip from '@radix-ui/react-tooltip';
-import { HomeIcon, PersonIcon, BackpackIcon, Pencil2Icon } from '@radix-ui/react-icons';
+import { HomeIcon, PersonIcon, BackpackIcon, FileTextIcon } from '@radix-ui/react-icons';
 
 const navItems = [
   { id: 'hero', icon: <HomeIcon />, label: '首頁' },
   { id: 'about', icon: <PersonIcon />, label: '關於我' },
   { id: 'experience', icon: <BackpackIcon />, label: '工作經歷' },
-  { id: 'portfolio', icon: <Pencil2Icon />, label: '作品集' },
+  { id: 'portfolio', icon: <FileTextIcon />, label: '作品集' },
 ];
 
 export const RightNav = () => {
