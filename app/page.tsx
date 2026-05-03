@@ -109,6 +109,7 @@ export default function Home() {
       { name: '待辦事項清單', description: '一個有增刪改功能的 Todo List', link: 'https://github.com/laura-chou/react-todo-list' },
       { name: '77Play 會員系統', description: '77Play 桌遊店的會員管理系統，方便商家管理會員金流', link: 'https://github.com/laura-chou/77PlaySystem' },
       { name: '錢跡', description: '一個債務管理系統，用來協助使用者清楚管理彼此之間的金錢往來與還款狀況', link: 'https://github.com/laura-chou/money-trace' },
+      { name: '個人作品集', description: '個人工作經歷及作品展示', link: 'https://github.com/laura-chou/portfolio' },
     ],
     node: [
       { name: '77Play 會員系統 API', description: '主要提供 77PLAY 會員管理系統的 API', link: 'https://github.com/laura-chou/77PlaySystem/tree/77-play-api' },

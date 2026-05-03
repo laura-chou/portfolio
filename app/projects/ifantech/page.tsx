@@ -188,18 +188,7 @@ export default function IfantechProjects() {
                       {section.projects.map((project, pIdx) => (
                         <tr key={pIdx}>
                           <td className="border border-gray-300 p-2 text-gray-900 font-medium">
-                            {project.link ? (
-                              <a
-                                href={project.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-blue-600 hover:underline"
-                              >
-                                {project.name}
-                              </a>
-                            ) : (
-                              project.name
-                            )}
+                            {project.name}
                           </td>
                           <td className="border border-gray-300 p-2 text-left text-gray-600">
                             {project.description.map((desc, dIdx) => (
