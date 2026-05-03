@@ -169,7 +169,7 @@ export default function Home() {
           <Avatar.Root className="inline-flex items-center justify-center align-middle overflow-hidden select-none w-32 h-32 rounded-full border-4 border-white/30 shadow-2xl mb-6">
             <Avatar.Image
               className="w-full h-full object-cover"
-              src="/me.jpg"
+              src="/portfolio/me.jpg"
               alt="Yu Lun Chou"
             />
           </Avatar.Root>
@@ -297,7 +297,7 @@ export default function Home() {
                   className="flex-1 min-w-[60px] flex items-center justify-center py-4 px-2 text-gray-400 hover:text-orange-500 data-[state=active]:text-orange-600 data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-orange-500 transition-all outline-none"
                   value={tab.value}
                 >
-                  <FontAwesomeIcon icon={tab.icon} size="2x" />
+                  <FontAwesomeIcon icon={tab.icon as any} size="2x" />
                 </Tabs.Trigger>
               ))}
             </Tabs.List>

@@ -5,7 +5,8 @@ import { RightNav } from './RightNav';
 
 export const NavWrapper = () => {
   const pathname = usePathname();
-  const isHomePage = pathname === '/';
+  // 在 GitHub Pages 上，pathname 可能包含 basePath (例如 /portfolio)
+  const isHomePage = pathname === '/' || pathname === '/portfolio' || pathname === '/portfolio/';
 
   if (!isHomePage) return null;
 
