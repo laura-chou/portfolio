@@ -8,7 +8,7 @@ import * as Avatar from "@radix-ui/react-avatar";
 import * as HoverCard from "@radix-ui/react-hover-card";
 import { GitHubLogoIcon, CaretUpIcon, CaretDownIcon, ExternalLinkIcon } from "@radix-ui/react-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faJs, faNode, faVuejs, faReact } from '@fortawesome/free-brands-svg-icons'
+import { faJs, faNode, faVuejs, faReact, faPython } from '@fortawesome/free-brands-svg-icons'
 import { faPalette, faCode } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link';
 import '@/styles/hero.css';
@@ -99,6 +99,9 @@ const ProjectList = ({ projects }: { projects: { name: string, description: stri
 
 export default function Home() {
   const portfolioData = {
+    python: [
+      { name: 'PulseGuard IoT', description: '智慧心率與血氧監測系統：結合 ESP32 與 Python/Streamlit 的遠端健康監控方案。具即時降噪、雙核調度與報告主動推播功能。', link: 'https://github.com/laura-chou/pulse-guard-iot' },
+    ],
     vue: [
       { name: '交給命運', description: '這是一個抽籤（抽卡）功能的網站，模擬隨機抽取結果的互動體驗', link: 'https://github.com/laura-chou/destiny-draw' },
       { name: '旅食住行網', description: '一個旅遊資訊網站，提供景點介紹與相關資料，方便使用者查詢與瀏覽旅遊內容', link: 'https://github.com/laura-chou/tourism-info' },
@@ -283,9 +286,10 @@ export default function Home() {
         {/* Portfolio */}
         <section id="portfolio" className="scroll-mt-20 pb-20">
           <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">作品集</h2>
-          <Tabs.Root className="flex flex-col w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden" defaultValue="js">
+          <Tabs.Root className="flex flex-col w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden" defaultValue="python">
             <Tabs.List className="flex border-b border-gray-100 bg-gray-50/50 overflow-x-auto no-scrollbar" aria-label="專案分類">
               {[
+                { value: 'python', icon: faPython },
                 { value: 'js', icon: faJs },
                 { value: 'node', icon: faNode },
                 { value: 'vue', icon: faVuejs },
@@ -304,6 +308,9 @@ export default function Home() {
             </Tabs.List>
 
             <div className="p-8 min-h-[300px]">
+              <Tabs.Content value="python" className="outline-none animate-in fade-in duration-300">
+                <ProjectList projects={portfolioData.python} />
+              </Tabs.Content>
               <Tabs.Content value="js" className="outline-none animate-in fade-in duration-300">
                 <ProjectList projects={portfolioData.js} />
               </Tabs.Content>
