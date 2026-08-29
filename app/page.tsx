@@ -10,6 +10,7 @@ import { GitHubLogoIcon, CaretUpIcon, CaretDownIcon, ExternalLinkIcon } from "@r
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faJs, faNode, faVuejs, faReact, faPython } from '@fortawesome/free-brands-svg-icons'
 import { faPalette, faCode } from '@fortawesome/free-solid-svg-icons'
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import Link from 'next/link';
 import '@/styles/hero.css';
 
@@ -101,6 +102,7 @@ export default function Home() {
   const portfolioData = {
     python: [
       { name: 'PulseGuard IoT', description: '智慧心率與血氧監測系統：結合 ESP32 與 Python/Streamlit 的遠端健康監控方案。具即時降噪、雙核調度與報告主動推播功能。', link: 'https://github.com/laura-chou/pulse-guard-iot' },
+      { name: 'Pacific Parrotlet Behavior Detector', description: '基於 YOLOv8 與 Gradio 的雙階段推論系統，能先過濾非鸚鵡畫面，再辨識太平洋鸚鵡的 13 種日常行為，支援 Web UI 與命令列操作。', link: 'https://github.com/laura-chou/parrot-detection' },
     ],
     vue: [
       { name: '交給命運', description: '這是一個抽籤（抽卡）功能的網站，模擬隨機抽取結果的互動體驗', link: 'https://github.com/laura-chou/destiny-draw' },
@@ -302,7 +304,7 @@ export default function Home() {
                   className="flex-1 min-w-[60px] flex items-center justify-center py-4 px-2 text-gray-400 hover:text-orange-500 data-[state=active]:text-orange-600 data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-orange-500 transition-all outline-none"
                   value={tab.value}
                 >
-                  <FontAwesomeIcon icon={tab.icon as any} size="2x" />
+                  <FontAwesomeIcon icon={tab.icon as IconProp} size="2x" />
                 </Tabs.Trigger>
               ))}
             </Tabs.List>
