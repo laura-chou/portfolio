@@ -103,6 +103,7 @@ export default function Home() {
     python: [
       { name: 'PulseGuard IoT', description: '智慧心率與血氧監測系統：結合 ESP32 與 Python/Streamlit 的遠端健康監控方案。具即時降噪、雙核調度與報告主動推播功能。', link: 'https://github.com/laura-chou/pulse-guard-iot' },
       { name: 'Pacific Parrotlet Behavior Detector', description: '基於 YOLOv8 與 Gradio 的雙階段推論系統，能先過濾非鸚鵡畫面，再辨識太平洋鸚鵡的 13 種日常行為，支援 Web UI 與命令列操作。', link: 'https://github.com/laura-chou/parrot-detection' },
+      { name: 'Mineral RAG', description: '基於 LLM 與 LangChain 的雙階段離線 RAG 系統，能先提取礦物專有名詞，再精準檢索並生成其硬度、化學成分等物理特性，支援 Streamlit 網頁與命令列操作。', link: 'https://github.com/laura-chou/mineral-rag' },
     ],
     vue: [
       { name: '交給命運', description: '這是一個抽籤（抽卡）功能的網站，模擬隨機抽取結果的互動體驗', link: 'https://github.com/laura-chou/destiny-draw' },
