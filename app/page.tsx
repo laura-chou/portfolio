@@ -229,7 +229,7 @@ export default function Home() {
               <span className="w-8 h-1 bg-orange-500 rounded-full"></span>
             </h2>
             <p className="text-xl text-gray-600 leading-relaxed">
-              擁有近 5 年開發經驗的軟體工程師，專精於 .NET 企業系統開發、金流 API 串接與系統架構優化。喜愛探索新技術，具備獨立解決問題與跨領域（Python 自動化、AI/RAG、前端）實作能力。
+              為了學一技之長起手，卻在程式世界裡發現了無窮樂趣！喜愛探索新技術，具備獨立解決問題與跨領域實作能力，無論是前端、後端還是自動化應用，都樂在其中並持續精進。
             </p>
           </div>
         </section>
