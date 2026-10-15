@@ -11,7 +11,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faJs, faNode, faVuejs, faReact, faPython } from '@fortawesome/free-brands-svg-icons'
 import { faPalette, faCode } from '@fortawesome/free-solid-svg-icons'
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import Link from 'next/link';
 import '@/styles/hero.css';
 
 type ExperienceItemProps = {
@@ -20,9 +19,10 @@ type ExperienceItemProps = {
   role: string;
   period: string;
   details: React.ReactNode;
+  tags?: string[];
 };
 
-const ExperienceItem = ({ company, department, role, period, details }: ExperienceItemProps) => {
+const ExperienceItem = ({ company, department, role, period, details, tags }: ExperienceItemProps) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -56,6 +56,15 @@ const ExperienceItem = ({ company, department, role, period, details }: Experien
                 <div className="text-gray-600 space-y-2 max-w-none text-sm leading-relaxed">
                   {details}
                 </div>
+                {tags && tags.length > 0 && (
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {tags.map((tag, index) => (
+                      <span key={index} className="px-2.5 py-1 bg-orange-50 text-orange-600 text-xs font-medium rounded-md">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </Collapsible.Content>
           </div>
@@ -220,7 +229,7 @@ export default function Home() {
               <span className="w-8 h-1 bg-orange-500 rounded-full"></span>
             </h2>
             <p className="text-xl text-gray-600 leading-relaxed">
-              因為想學一技之長而跑去學電腦程式語言，學著學著發現原來程式語言能應用在許多方面，覺得相當有趣，目前正在程式語言方面持續學習。
+              擁有近 5 年開發經驗的軟體工程師，專精於 .NET 企業系統開發、金流 API 串接與系統架構優化。喜愛探索新技術，具備獨立解決問題與跨領域（Python 自動化、AI/RAG、前端）實作能力。
             </p>
           </div>
         </section>
@@ -235,15 +244,12 @@ export default function Home() {
               role="軟體工程師"
               period="2 年半以上"
               details={
-                <div className="space-y-4">
-                  <ul className="list-disc list-inside space-y-1">
-                    <li>.NET開發與維護系統排程及相關服務</li>
-                    <li>軟體測試及維護</li>
-                    <li>串接第三方金流API</li>
-                    <li>Git版本控管</li>
-                  </ul>
-                </div>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>負責核心交易系統維護與多管道第三方金流 API 串接，設計安全驗證與 Callback 處理機制。</li>
+                  <li>落實單元測試與 Git / CI/CD 自動化流程，進行系統程式碼重構與效能優化。</li>
+                </ul>
               }
+              tags={["C#", ".NET", "PostgreSQL", "MySQL", "JavaScript", "Git", "CI/CD", "單元測試"]}
             />
             <ExperienceItem
               company="凡達科技有限公司"
@@ -251,19 +257,12 @@ export default function Home() {
               role="軟體工程師"
               period="1 年半以上"
               details={
-                <div className="space-y-4">
-                  <ul className="list-disc list-inside space-y-1">
-                    <li>.NET WebForm 及 MVC 專案開發</li>
-                    <li>與客戶討論需求及 UI 設計</li>
-                    <li>現有專案優化、維護、debug</li>
-                    <li>資料庫規劃</li>
-                    <li>技術文件撰寫</li>
-                  </ul>
-                  <Link href="/projects/ifantech" className="inline-flex items-center text-orange-600 font-bold hover:underline">
-                    查看專案經歷 →
-                  </Link>
-                </div>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>獨立負責資策會等大型政府/法人委外專案開發，從需求對接、資料庫規劃到系統上線。</li>
+                  <li>設計高擴充性多層級權限控管邏輯，並導入模組化架構落實高內聚低耦合原則。</li>
+                </ul>
               }
+              tags={["C#", "ASP.NET MVC/API", "WebForms", "MySQL", "JavaScript", "系統架構設計"]}
             />
             <ExperienceItem
               company="創時億網路科技有限公司"
@@ -271,17 +270,12 @@ export default function Home() {
               role="助理前端工程師"
               period="半年以上"
               details={
-                <div className="space-y-4">
-                  <ul className="list-disc list-inside space-y-1">
-                    <li>React-Native 小工具開發</li>
-                    <li>python 爬蟲</li>
-                    <li>python 機器人開發</li>
-                  </ul>
-                  <Link href="/projects/chuangshiyi" className="inline-flex items-center text-orange-600 font-bold hover:underline">
-                    查看專案經歷 →
-                  </Link>
-                </div>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>開發 React Native 內部維運 App，整合 Google Map API 實作多點定位與路線規劃。</li>
+                  <li>使用 Python (Selenium/Appium/OpenCV) 研發跨平台自動化流程，並以 Flask 建置全棧原型。</li>
+                </ul>
               }
+              tags={["React Native", "Python", "RPA", "OpenCV", "Flask", "JavaScript"]}
             />
           </div>
         </section>
