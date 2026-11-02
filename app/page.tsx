@@ -6,10 +6,9 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import * as Tabs from "@radix-ui/react-tabs";
 import * as Avatar from "@radix-ui/react-avatar";
 import * as HoverCard from "@radix-ui/react-hover-card";
-import { GitHubLogoIcon, CaretUpIcon, CaretDownIcon, ExternalLinkIcon } from "@radix-ui/react-icons"
+import { GitHubLogoIcon, CaretUpIcon, CaretDownIcon, ExternalLinkIcon } from "@radix-ui/react-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faJs, faNode, faVuejs, faReact, faPython } from '@fortawesome/free-brands-svg-icons'
-import { faPalette, faCode } from '@fortawesome/free-solid-svg-icons'
+import { faLaptopCode, faMicrochip, faVial, faPalette } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import '@/styles/hero.css';
 
@@ -42,7 +41,7 @@ const ExperienceItem = ({ company, department, role, period, details, tags }: Ex
               </div>
               <Collapsible.Trigger asChild>
                 <button
-                  className="p-2 rounded-full hover:bg-orange-50 text-orange-600 transition-colors"
+                  className="p-2 rounded-full hover:bg-orange-50 text-orange-600 transition-colors cursor-pointer"
                   aria-label={open ? "收起" : "展開"}
                 >
                   {open ? <CaretUpIcon className="w-6 h-6" /> : <CaretDownIcon className="w-6 h-6" />}
@@ -72,34 +71,84 @@ const ExperienceItem = ({ company, department, role, period, details, tags }: Ex
       </div>
     </div>
   );
-}
+};
 
-const ProjectList = ({ projects }: { projects: { name: string, description: string | React.ReactNode, link: string }[] }) => (
+export type ProjectLink = {
+  label: string;
+  url: string;
+  isPrimary?: boolean;
+};
+
+export type ProjectItem = {
+  name: string;
+  description: string | React.ReactNode;
+  tags?: string[];
+  links: ProjectLink[];
+};
+
+const ProjectList = ({ projects }: { projects: ProjectItem[] }) => (
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
     {projects.map((project, index) => {
-      const isGitHub = project.link.includes('github.com');
+      const primaryLink = project.links.find(l => l.isPrimary) || project.links[0];
+
       return (
         <div key={index} className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col h-full">
-          <h3 className="text-xl font-bold text-gray-900 mb-3">
-            <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:underline">
-              {project.name}
-            </a>
+          <h3 className="text-xl font-bold text-gray-900 mb-2">
+            {primaryLink ? (
+              <a
+                href={primaryLink.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-orange-600 hover:underline"
+              >
+                {project.name}
+              </a>
+            ) : (
+              project.name
+            )}
           </h3>
+
+          {project.tags && project.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mb-3">
+              {project.tags.map((tag, tagIdx) => (
+                <span
+                  key={tagIdx}
+                  className="px-2 py-0.5 bg-orange-50 text-orange-700 text-xs font-medium rounded-md"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+
           <div className="text-gray-600 text-sm leading-relaxed flex-grow">
             {typeof project.description === 'string' ? <p>{project.description}</p> : project.description}
           </div>
-          <div className="mt-4 pt-4 border-t border-gray-50">
-            <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-xs font-medium text-gray-400 hover:text-orange-500 transition-colors">
-              {isGitHub ? (
-                <>
-                  <GitHubLogoIcon className="mr-1 w-4 h-4" /> View Source
-                </>
-              ) : (
-                <>
-                  <ExternalLinkIcon className="mr-1 w-4 h-4" /> View Project
-                </>
-              )}
-            </a>
+
+          <div className="mt-4 pt-4 border-t border-gray-100 flex flex-wrap items-center gap-2">
+            {project.links.map((linkItem, linkIdx) => {
+              const isGitHub = linkItem.url.includes('github.com');
+              return (
+                <a
+                  key={linkIdx}
+                  href={linkItem.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                    linkItem.isPrimary
+                      ? 'bg-orange-500 hover:bg-orange-600 text-white shadow-sm'
+                      : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                  }`}
+                >
+                  {isGitHub ? (
+                    <GitHubLogoIcon className="mr-1.5 w-3.5 h-3.5" />
+                  ) : (
+                    <ExternalLinkIcon className="mr-1.5 w-3.5 h-3.5" />
+                  )}
+                  {linkItem.label}
+                </a>
+              );
+            })}
           </div>
         </div>
       );
@@ -108,65 +157,316 @@ const ProjectList = ({ projects }: { projects: { name: string, description: stri
 );
 
 export default function Home() {
-  const portfolioData = {
-    python: [
-      { name: 'PulseGuard IoT', description: '智慧心率與血氧監測系統：結合 ESP32 與 Python/Streamlit 的遠端健康監控方案。具即時降噪、雙核調度與報告主動推播功能。', link: 'https://github.com/laura-chou/pulse-guard-iot' },
-      { name: 'Pacific Parrotlet Behavior Detector', description: '基於 YOLOv8 與 Gradio 的雙階段推論系統，能先過濾非鸚鵡畫面，再辨識太平洋鸚鵡的 13 種日常行為，支援 Web UI 與命令列操作。', link: 'https://github.com/laura-chou/parrot-detection' },
-      { name: 'Mineral RAG', description: '基於 LLM 與 LangChain 的雙階段離線 RAG 系統，能先提取礦物專有名詞，再精準檢索並生成其硬度、化學成分等物理特性，支援 Streamlit 網頁與命令列操作。', link: 'https://github.com/laura-chou/mineral-rag' },
+  const portfolioData: {
+    fullstack: ProjectItem[];
+    aiot: ProjectItem[];
+    tdd: ProjectItem[];
+    design: ProjectItem[];
+  } = {
+    fullstack: [
+      // 1. 完整全端系統/商業應用
+      {
+        name: '77Play 會員系統',
+        description: '77Play 桌遊店的會員管理與金流維運系統，包含前台會員操作介面與後端 API 服務，方便商家管理會員資產與消費記錄。',
+        tags: ['React', 'Node.js', 'Express', 'MySQL', 'RESTful API'],
+        links: [
+          { label: 'Frontend Source', url: 'https://github.com/laura-chou/77PlaySystem', isPrimary: true },
+          { label: 'API Source', url: 'https://github.com/laura-chou/77PlaySystem/tree/77-play-api' }
+        ]
+      },
+      {
+        name: '錢跡 (Money Trace)',
+        description: '債務與帳務管理系統，協助使用者清楚記錄並追蹤彼此之間的金錢往來、拆帳與還款狀況。',
+        tags: ['React', 'JavaScript', 'CSS3'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/money-trace', isPrimary: true }
+        ]
+      },
+      {
+        name: '旅食住行網',
+        description: '旅遊資訊分享與查詢平台，提供景點特色介紹、交通與相關資訊瀏覽，並建置專屬 API 支援資料存取。',
+        tags: ['Vue.js', 'Node.js', 'Express', 'RESTful API'],
+        links: [
+          { label: 'Frontend Source', url: 'https://github.com/laura-chou/tourism-info', isPrimary: true },
+          { label: 'API Source', url: 'https://github.com/laura-chou/tourism-info/tree/tourism-info-api' }
+        ]
+      },
+      {
+        name: '線上相簿',
+        description: '相簿展示與管理平台，提供照片上傳、分類瀏覽與圖庫管理功能，並搭配專屬後端 API 進行媒體資料處理。',
+        tags: ['Vue.js', 'Node.js', 'Express', 'RESTful API'],
+        links: [
+          { label: 'Frontend Source', url: 'https://github.com/laura-chou/photo-album', isPrimary: true },
+          { label: 'API Source', url: 'https://github.com/laura-chou/photo-album/tree/photo-album-api' }
+        ]
+      },
+      {
+        name: '個人作品集',
+        description: '個人工作經歷、核心專業領域與精選作品展示網站，採用 Next.js 與 Tailwind CSS 開發並部署於 GitHub Pages。',
+        tags: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/portfolio', isPrimary: true }
+        ]
+      },
+      {
+        name: '番茄鐘 (Pomodoro)',
+        description: '實作番茄工作法的時間管理工具，提供專注倒數、休息提醒與週期設定功能，提升日常工作專注度。',
+        tags: ['Vue.js', 'JavaScript', 'CSS3'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/pomodoro', isPrimary: true }
+        ]
+      },
+      {
+        name: '待辦事項清單',
+        description: '具備完整增刪查改（CRUD）功能與狀態篩選的任務清單應用。',
+        tags: ['React', 'JavaScript', 'CSS3'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/react-todo-list', isPrimary: true }
+        ]
+      },
+      {
+        name: '交給命運',
+        description: '抽籤與抽卡互動網站，模擬隨機抽取結果與卡片視覺動效，提供趣味性抉擇體驗。',
+        tags: ['Vue.js', 'JavaScript', 'Animation'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/destiny-draw', isPrimary: true }
+        ]
+      },
+
+      // 2. LINE 機器人
+      {
+        name: '人生好難 Bot',
+        description: 'LINE 智慧推播機器人，每天定時自動廣播精選人生語錄、生活小知識與正向幽默訊息。',
+        tags: ['Node.js', 'LINE Messaging API', 'Cron Job'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/life-is-hard-line-bot', isPrimary: true }
+        ]
+      },
+      {
+        name: '電影查詢機器人',
+        description: 'LINE 聊天機器人，使用者可直接在聊天室內搜尋即時電影資訊、劇情大綱與上映詳情。',
+        tags: ['Node.js', 'LINE Messaging API', 'RESTful API'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/movie-search-line-bot', isPrimary: true }
+        ]
+      },
+      {
+        name: '旅食住行查詢機器人',
+        description: 'LINE 旅遊助理機器人，提供景點資訊、在地推薦與旅遊路線即時查詢回傳服務。',
+        tags: ['Node.js', 'LINE Messaging API', 'Chatbot'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/tourism-info-line-bot', isPrimary: true }
+        ]
+      },
+
+      // 3. 互動小遊戲與樣式
+      {
+        name: '遊戲後端 API',
+        description: (
+          <div>
+            <p>集中管理多款網頁小遊戲的後端服務，提供統一的資料存取、分數記錄與接口服務：</p>
+            <ul className="list-disc list-inside mt-1 ml-2 text-xs">
+              <li>怪獸終結者</li>
+              <li>搶救荷包大作戰</li>
+              <li>象棋記憶大賽</li>
+            </ul>
+          </div>
+        ),
+        tags: ['Node.js', 'Express', 'RESTful API'],
+        links: [
+          { label: 'API Source', url: 'https://github.com/laura-chou/game-api', isPrimary: true }
+        ]
+      },
+      {
+        name: '怪獸終結者',
+        description: '點擊攻擊怪物的互動網頁遊戲，怪物具備血量條與狀態轉變，擊敗後自動晉級至更高等級關卡。',
+        tags: ['JavaScript', 'HTML5', 'CSS3'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/hit-monsters', isPrimary: true }
+        ]
+      },
+      {
+        name: '搶救荷包大作戰',
+        description: '時間限制收集掉落鈔票的累積計分遊戲，設計隨機掉落的增時道具與彩券事件，增加遊玩趣味。',
+        tags: ['JavaScript', 'HTML5 Canvas', 'Game Loop'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/rescue-money', isPrimary: true }
+        ]
+      },
+      {
+        name: '象棋記憶大賽',
+        description: '翻牌配對相同象棋棋子的益智遊戲，結合記憶力考驗與消除回饋機制。',
+        tags: ['JavaScript', 'CSS3 Flip', 'DOM Manipulation'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/turn-chess', isPrimary: true }
+        ]
+      },
+      {
+        name: '海洋主題時鐘',
+        description: '以海洋風格為視覺主題的動態時鐘網站，結合流暢視覺設計與即時指針/數字時間顯示。',
+        tags: ['JavaScript', 'CSS Animation', 'SVG'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/ocean-theme-clock', isPrimary: true }
+        ]
+      },
+      {
+        name: 'Zen Garden',
+        description: '純粹透過 CSS 樣式置換展現現代版面排版美學，展示多樣化視覺風格與排版控制力。',
+        tags: ['CSS3', 'Responsive Design', 'Layout'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/zen-garden', isPrimary: true }
+        ]
+      },
+      {
+        name: '個人名片網頁',
+        description: '極簡且典雅的個人數位名片網頁，展示個人資訊與聯絡渠道。',
+        tags: ['HTML5', 'CSS3', 'Responsive'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/business-card', isPrimary: true }
+        ]
+      }
     ],
-    vue: [
-      { name: '交給命運', description: '這是一個抽籤（抽卡）功能的網站，模擬隨機抽取結果的互動體驗', link: 'https://github.com/laura-chou/destiny-draw' },
-      { name: '旅食住行網', description: '一個旅遊資訊網站，提供景點介紹與相關資料，方便使用者查詢與瀏覽旅遊內容', link: 'https://github.com/laura-chou/tourism-info' },
-      { name: '番茄鐘', description: '一個實作番茄工作法的時間管理工具', link: 'https://github.com/laura-chou/pomodoro' },
-      { name: '線上相簿', description: '提供照片上傳、瀏覽與管理功能，讓使用者可以整理並展示個人圖片內容。', link: 'https://github.com/laura-chou/photo-album' },
+
+    aiot: [
+      {
+        name: 'PulseGuard IoT',
+        description: '智慧心率與血氧監測系統：結合 ESP32 與 Python / Streamlit 的遠端健康監控方案。具備即時降噪濾波、雙核多工調度與異常報告主動推播功能。',
+        tags: ['Python', 'ESP32', 'Streamlit', 'IoT', 'FreeRTOS'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/pulse-guard-iot', isPrimary: true }
+        ]
+      },
+      {
+        name: 'Pacific Parrotlet Behavior Detector',
+        description: '基於 YOLOv8 與 Gradio 的雙階段電腦視覺推論系統，先過濾非鸚鵡畫面，再辨識太平洋鸚鵡的 13 種日常行為，支援 Web UI 與命令列操作。',
+        tags: ['Python', 'YOLOv8', 'Computer Vision', 'Gradio', 'PyTorch'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/parrot-detection', isPrimary: true }
+        ]
+      },
+      {
+        name: 'Mineral RAG',
+        description: '基於 LLM 與 LangChain 的雙階段離線 RAG 系統，精準提取礦物專有名詞並檢索生成硬度、化學式等物理特性，支援 Streamlit 網頁與 CLI 介面。',
+        tags: ['Python', 'LangChain', 'RAG', 'LLM', 'Streamlit'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/mineral-rag', isPrimary: true }
+        ]
+      }
     ],
-    react: [
-      { name: '待辦事項清單', description: '一個有增刪改功能的 Todo List', link: 'https://github.com/laura-chou/react-todo-list' },
-      { name: '77Play 會員系統', description: '77Play 桌遊店的會員管理系統，方便商家管理會員金流', link: 'https://github.com/laura-chou/77PlaySystem' },
-      { name: '錢跡', description: '一個債務管理系統，用來協助使用者清楚管理彼此之間的金錢往來與還款狀況', link: 'https://github.com/laura-chou/money-trace' },
-      { name: '個人作品集', description: '個人工作經歷及作品展示', link: 'https://github.com/laura-chou/portfolio' },
-    ],
-    node: [
-      { name: '77Play 會員系統 API', description: '主要提供 77PLAY 會員管理系統的 API', link: 'https://github.com/laura-chou/77PlaySystem/tree/77-play-api' },
-      { name: '線上相簿 API', description: '主要提供線上相簿網站的 API', link: 'https://github.com/laura-chou/photo-album/tree/photo-album-api' },
-      { name: '旅遊資訊網站 API', description: '主要提供旅遊資訊網站的 API', link: 'https://github.com/laura-chou/tourism-info/tree/tourism-info-api' },
-      { name: '遊戲 API', description: (
-        <div>
-          <p>集中管理三個遊戲的後端功能，提供統一的資料存取與服務接口</p>
-          <ul className="list-disc list-inside mt-1 ml-2">
-            <li>搶救錢包大作戰</li>
-            <li>象棋記憶大賽</li>
-            <li>怪獸終結者</li>
-          </ul>
-        </div>
-      ), link: 'https://github.com/laura-chou/game-api' },
-      { name: '人生好難 Bot', description: 'LINE 機器人，每天定時廣播一則語錄、小知識等訊息', link: 'https://github.com/laura-chou/life-is-hard-line-bot' },
-      { name: '電影查詢機器人', description: 'LINE 機器人，可透過 LINE 搜尋電影資訊並回傳結果', link: 'https://github.com/laura-chou/movie-search-line-bot' },
-      { name: '旅食住行查詢機器人', description: 'LINE 機器人，提供旅遊景點與相關資訊查詢', link: 'https://github.com/laura-chou/tourism-info-line-bot' },
-    ],
-    js: [
-      { name: '海洋主題時鐘', description: '一個以海洋風格為主題的時鐘網站，結合視覺設計與時間顯示功能', link: 'https://github.com/laura-chou/ocean-theme-clock' },
-      { name: 'Zen Garden', description: '透過 CSS 改變版面樣式，展示不同視覺風格的呈現效果', link: 'https://github.com/laura-chou/zen-garden' },
-      { name: '個人名片', description: '把個人資訊做成一個簡單的網頁名片', link: 'https://github.com/laura-chou/business-card' },
-      { name: '怪獸終結者', description: '玩家透過點擊來攻擊怪物，怪物會有血量或狀態變化，成功擊敗怪物後進入下一關', link: 'https://github.com/laura-chou/hit-monsters' },
-      { name: '搶救荷包大作戰', description: '玩家在畫面中收集掉落的鈔票來累積金額，遊戲過程中會出現不同事件增加變化(增加時間的道具、彩券掉落)，目標是在時間內累積越多金額越高分', link: 'https://github.com/laura-chou/rescue-money' },
-      { name: '象棋記憶大賽', description: '玩家透過翻牌找出相同的象棋棋子配對，以記憶力與反應力為核心玩法，配對成功後牌面會固定或消除，直到完成所有配對為止', link: 'https://github.com/laura-chou/turn-chess' },
-    ],
+
     tdd: [
-      { name: '購物車系統 TDD', description: '核心功能：加入商品、計算總價、折扣', link: 'https://github.com/laura-chou/shopping-cart-kata' },
-      { name: '火星探測車 TDD', description: '核心功能：接收移動指令（前進、後退、左轉、右轉）、座標移動、邊界控制', link: 'https://github.com/laura-chou/mars-rover-kata' },
-      { name: '賓果遊戲 TDD', description: '核心功能：產生賓果卡、標記數字、判斷連線（橫向、縱向、對角線）', link: 'https://github.com/laura-chou/bingo-kata' },
-      { name: '保齡球計分 TDD', description: '核心功能：計算 10 局分數、處理 spare / strike、加權 bonus 分數', link: 'https://github.com/laura-chou/bowling-kata' },
-      { name: '骰子梭哈 TDD', description: '核心功能：骰子組合比大小、特殊牌型判定（豹子、順子、對子）', link: 'https://github.com/laura-chou/sibala-kata' },
-      { name: '網球計分 TDD', description: '核心功能：計分系統（0、15、30、40）、deuce、勝負判定', link: 'https://github.com/laura-chou/tennis-kata' },
+      {
+        name: '購物車系統 TDD',
+        description: '以測試驅動開發實踐電商購物車核心邏輯：商品項目添加、數量異動、總價動態計算與階梯式折扣優惠規則。',
+        tags: ['TDD', 'Unit Testing', 'Software Design', 'Kata'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/shopping-cart-kata', isPrimary: true }
+        ]
+      },
+      {
+        name: '火星探測車 TDD',
+        description: '實作經典 Mars Rover Kata：指令接收解析（前進、後退、左轉、右轉）、二維座標位移計算與網格邊界迴圈控制。',
+        tags: ['TDD', 'Refactoring', 'Clean Code', 'Kata'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/mars-rover-kata', isPrimary: true }
+        ]
+      },
+      {
+        name: '賓果遊戲 TDD',
+        description: '賓果核心演算法 TDD 實作：隨機賓果卡生成、號碼標記與高效連線判定（橫向、縱向、兩條對角線）。',
+        tags: ['TDD', 'Algorithms', 'Unit Testing', 'Kata'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/bingo-kata', isPrimary: true }
+        ]
+      },
+      {
+        name: '保齡球計分 TDD',
+        description: '保齡球賽制計分演算法：完整計算 10 局成績、精準處理 Spare / Strike 連鎖加權 Bonus 分數與第十局補球規則。',
+        tags: ['TDD', 'Edge Cases', 'Unit Testing', 'Kata'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/bowling-kata', isPrimary: true }
+        ]
+      },
+      {
+        name: '骰子梭哈 TDD',
+        description: '台灣傳統十八仔（骰子梭哈）比大小演算法：骰子組合點數計算、特殊牌型規則（豹子、順子、單對計算）嚴密測試覆蓋。',
+        tags: ['TDD', 'Combinatorics', 'Unit Testing', 'Kata'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/sibala-kata', isPrimary: true }
+        ]
+      },
+      {
+        name: '網球計分 TDD',
+        description: '網球比分機制實作：標準計分階段（Love、15、30、40）、Deuce 平局判定、Advantage 領先與 Game 局勝負判定。',
+        tags: ['TDD', 'State Pattern', 'Unit Testing', 'Kata'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/tennis-kata', isPrimary: true }
+        ]
+      }
     ],
+
     design: [
-      { name: 'Illustrator', description: '設計作品集 - Illustrator', link: 'https://drive.google.com/file/d/16lcpb8QxNGaLfyTbxf5VofsSNvaGf07g/view?usp=sharing' },
-      { name: 'Photoshop', description: '設計作品集 - Photoshop', link: 'https://drive.google.com/file/d/1L8PmyJV-0mdfepliPNt857DTJJ20gRLF/view?usp=sharing' },
-      { name: 'Line 貼圖', description: '設計作品集 - Line 貼圖', link: 'https://drive.google.com/file/d/1gsR1xPgEeTkX8zWl3i1c9NqeDkaBysG2/view?usp=sharing' },
-      { name: 'LOGO 設計', description: '設計作品集 - LOGO 設計', link: 'https://drive.google.com/file/d/1d30veP87RVIcDqyS35SRiztjHkqZPYSH/view?usp=sharing' },
+      {
+        name: 'Illustrator 向量插畫與品牌設計',
+        description: '設計作品集 - 精選向量幾何構圖、品牌識別元素與商用插畫素材製作。',
+        tags: ['Adobe Illustrator', 'Graphic Design', 'Vector Art'],
+        links: [
+          { label: 'View Portfolio', url: 'https://drive.google.com/file/d/16lcpb8QxNGaLfyTbxf5VofsSNvaGf07g/view?usp=sharing', isPrimary: true }
+        ]
+      },
+      {
+        name: 'Photoshop 影像合成與後製處理',
+        description: '設計作品集 - 商業主視覺合成、色彩調教、光影精修與多層次素材融合。',
+        tags: ['Adobe Photoshop', 'Photo Retouching', 'Visual Composite'],
+        links: [
+          { label: 'View Portfolio', url: 'https://drive.google.com/file/d/1L8PmyJV-0mdfepliPNt857DTJJ20gRLF/view?usp=sharing', isPrimary: true }
+        ]
+      },
+      {
+        name: 'Line 原創貼圖設計',
+        description: '設計作品集 - 原創角色 IP 發想、表情情緒繪製與貼圖審核規格完整輸出。',
+        tags: ['Character Design', 'Line Sticker', 'Illustration'],
+        links: [
+          { label: 'View Portfolio', url: 'https://drive.google.com/file/d/1gsR1xPgEeTkX8zWl3i1c9NqeDkaBysG2/view?usp=sharing', isPrimary: true }
+        ]
+      },
+      {
+        name: 'LOGO 與品牌標誌設計',
+        description: '設計作品集 - 專屬品牌符號意象提煉、字體排印微調與應用規範制定。',
+        tags: ['Logo Design', 'Branding', 'Typography'],
+        links: [
+          { label: 'View Portfolio', url: 'https://drive.google.com/file/d/1d30veP87RVIcDqyS35SRiztjHkqZPYSH/view?usp=sharing', isPrimary: true }
+        ]
+      }
     ]
   };
+
+  const tabsConfig = [
+    {
+      value: 'fullstack',
+      label: '全端與網頁',
+      enLabel: 'Full-Stack & Web',
+      icon: faLaptopCode,
+    },
+    {
+      value: 'aiot',
+      label: 'AIoT 智慧應用',
+      enLabel: 'AI & IoT / Python',
+      icon: faMicrochip,
+    },
+    {
+      value: 'tdd',
+      label: '軟體工程實踐',
+      enLabel: 'Software Practice / TDD',
+      icon: faVial,
+    },
+    {
+      value: 'design',
+      label: '視覺與平面設計',
+      enLabel: 'Visual & Graphic Design',
+      icon: faPalette,
+    },
+  ];
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -283,42 +583,26 @@ export default function Home() {
         {/* Portfolio */}
         <section id="portfolio" className="scroll-mt-20 pb-20">
           <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">作品集</h2>
-          <Tabs.Root className="flex flex-col w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden" defaultValue="python">
+          <Tabs.Root className="flex flex-col w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden" defaultValue="fullstack">
             <Tabs.List className="flex border-b border-gray-100 bg-gray-50/50 overflow-x-auto no-scrollbar" aria-label="專案分類">
-              {[
-                { value: 'python', icon: faPython },
-                { value: 'js', icon: faJs },
-                { value: 'node', icon: faNode },
-                { value: 'vue', icon: faVuejs },
-                { value: 'react', icon: faReact },
-                { value: 'tdd', icon: faCode },
-                { value: 'design', icon: faPalette },
-              ].map((tab) => (
+              {tabsConfig.map((tab) => (
                 <Tabs.Trigger
                   key={tab.value}
-                  className="flex-1 min-w-[60px] flex items-center justify-center py-4 px-2 text-gray-400 hover:text-orange-500 data-[state=active]:text-orange-600 data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-orange-500 transition-all outline-none"
+                  className="flex-1 min-w-[140px] flex items-center justify-center gap-2.5 py-4 px-3 text-gray-500 hover:text-orange-500 data-[state=active]:text-orange-600 data-[state=active]:bg-white data-[state=active]:font-semibold data-[state=active]:border-b-2 data-[state=active]:border-orange-500 transition-all outline-none cursor-pointer group"
                   value={tab.value}
                 >
-                  <FontAwesomeIcon icon={tab.icon as IconProp} size="2x" />
+                  <FontAwesomeIcon icon={tab.icon as IconProp} className="w-4 h-4 transition-transform group-hover:scale-110" />
+                  <span className="text-sm whitespace-nowrap">{tab.label}</span>
                 </Tabs.Trigger>
               ))}
             </Tabs.List>
 
-            <div className="p-8 min-h-[300px]">
-              <Tabs.Content value="python" className="outline-none animate-in fade-in duration-300">
-                <ProjectList projects={portfolioData.python} />
+            <div className="p-6 sm:p-8 min-h-[300px]">
+              <Tabs.Content value="fullstack" className="outline-none animate-in fade-in duration-300">
+                <ProjectList projects={portfolioData.fullstack} />
               </Tabs.Content>
-              <Tabs.Content value="js" className="outline-none animate-in fade-in duration-300">
-                <ProjectList projects={portfolioData.js} />
-              </Tabs.Content>
-              <Tabs.Content value="node" className="outline-none animate-in fade-in duration-300">
-                <ProjectList projects={portfolioData.node} />
-              </Tabs.Content>
-              <Tabs.Content value="vue" className="outline-none animate-in fade-in duration-300">
-                <ProjectList projects={portfolioData.vue} />
-              </Tabs.Content>
-              <Tabs.Content value="react" className="outline-none animate-in fade-in duration-300">
-                <ProjectList projects={portfolioData.react} />
+              <Tabs.Content value="aiot" className="outline-none animate-in fade-in duration-300">
+                <ProjectList projects={portfolioData.aiot} />
               </Tabs.Content>
               <Tabs.Content value="tdd" className="outline-none animate-in fade-in duration-300">
                 <ProjectList projects={portfolioData.tdd} />
