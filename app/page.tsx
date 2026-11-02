@@ -193,8 +193,8 @@ export default function Home() {
     fullstack: [
       // 1. 完整全端系統/商業應用
       {
-        name: 'Vibe Sync 頻率同步中',
-        description: '這是一個基於 WebSocket 的即時多人默契問答網頁遊戲。',
+        name: '頻率同步中',
+        description: '一個基於 WebSocket 的即時多人默契問答網頁遊戲。',
         tags: ['React', 'Next.js', 'Python', 'WebSocket'],
         links: [
           { label: 'View Source', url: 'https://github.com/laura-chou/vibe-sync', isPrimary: true }
@@ -210,7 +210,7 @@ export default function Home() {
         ]
       },
       {
-        name: '錢跡 (Money Trace)',
+        name: '錢跡',
         description: '債務與帳務管理系統，協助使用者清楚記錄並追蹤彼此之間的金錢往來、拆帳與還款狀況。',
         tags: ['React', 'JavaScript', 'CSS3'],
         links: [
@@ -236,7 +236,7 @@ export default function Home() {
         ]
       },
       {
-        name: '番茄鐘 (Pomodoro)',
+        name: '番茄鐘',
         description: '實作番茄工作法的時間管理工具，提供專注倒數、休息提醒與週期設定功能，提升日常工作專注度。',
         tags: ['Vue.js', 'JavaScript', 'CSS3'],
         links: [
