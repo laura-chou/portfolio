@@ -8,7 +8,7 @@ import * as Avatar from "@radix-ui/react-avatar";
 import * as HoverCard from "@radix-ui/react-hover-card";
 import { GitHubLogoIcon, CaretUpIcon, CaretDownIcon, ExternalLinkIcon } from "@radix-ui/react-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLaptopCode, faMicrochip, faVial, faPalette } from '@fortawesome/free-solid-svg-icons';
+import { faMicrochip, faLaptopCode, faVial, faPalette } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import '@/styles/hero.css';
 
@@ -158,13 +158,48 @@ const ProjectList = ({ projects }: { projects: ProjectItem[] }) => (
 
 export default function Home() {
   const portfolioData: {
-    fullstack: ProjectItem[];
     aiot: ProjectItem[];
+    fullstack: ProjectItem[];
     tdd: ProjectItem[];
     design: ProjectItem[];
   } = {
+    aiot: [
+      {
+        name: 'PulseGuard IoT',
+        description: '智慧心率與血氧監測系統：結合 ESP32 與 Python / Streamlit 的遠端健康監控方案。具備即時降噪濾波、雙核多工調度與異常報告主動推播功能。',
+        tags: ['Python', 'ESP32', 'Streamlit', 'IoT', 'FreeRTOS'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/pulse-guard-iot', isPrimary: true }
+        ]
+      },
+      {
+        name: 'Pacific Parrotlet Behavior Detector',
+        description: '基於 YOLOv8 與 Gradio 的雙階段電腦視覺推論系統，先過濾非鸚鵡畫面，再辨識太平洋鸚鵡的 13 種日常行為，支援 Web UI 與命令列操作。',
+        tags: ['Python', 'YOLOv8', 'Computer Vision', 'Gradio', 'PyTorch'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/parrot-detection', isPrimary: true }
+        ]
+      },
+      {
+        name: 'Mineral RAG',
+        description: '基於 LLM 與 LangChain 的雙階段離線 RAG 系統，精準提取礦物專有名詞並檢索生成硬度、化學式等物理特性，支援 Streamlit 網頁與 CLI 介面。',
+        tags: ['Python', 'LangChain', 'RAG', 'LLM', 'Streamlit'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/mineral-rag', isPrimary: true }
+        ]
+      }
+    ],
+
     fullstack: [
       // 1. 完整全端系統/商業應用
+      {
+        name: 'Vibe Sync 頻率同步中',
+        description: '這是一個基於 WebSocket 的即時多人默契問答網頁遊戲',
+        tags: ['React', 'Next.js', 'Python', 'WebSocket'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/vibe-sync', isPrimary: true }
+        ]
+      },
       {
         name: '77Play 會員系統',
         description: '77Play 桌遊店的會員管理與金流維運系統，包含前台會員操作介面與後端 API 服務，方便商家管理會員資產與消費記錄。',
@@ -198,14 +233,6 @@ export default function Home() {
         links: [
           { label: 'Frontend Source', url: 'https://github.com/laura-chou/photo-album', isPrimary: true },
           { label: 'API Source', url: 'https://github.com/laura-chou/photo-album/tree/photo-album-api' }
-        ]
-      },
-      {
-        name: '個人作品集',
-        description: '個人工作經歷、核心專業領域與精選作品展示網站，採用 Next.js 與 Tailwind CSS 開發並部署於 GitHub Pages。',
-        tags: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript'],
-        links: [
-          { label: 'View Source', url: 'https://github.com/laura-chou/portfolio', isPrimary: true }
         ]
       },
       {
@@ -327,33 +354,6 @@ export default function Home() {
       }
     ],
 
-    aiot: [
-      {
-        name: 'PulseGuard IoT',
-        description: '智慧心率與血氧監測系統：結合 ESP32 與 Python / Streamlit 的遠端健康監控方案。具備即時降噪濾波、雙核多工調度與異常報告主動推播功能。',
-        tags: ['Python', 'ESP32', 'Streamlit', 'IoT', 'FreeRTOS'],
-        links: [
-          { label: 'View Source', url: 'https://github.com/laura-chou/pulse-guard-iot', isPrimary: true }
-        ]
-      },
-      {
-        name: 'Pacific Parrotlet Behavior Detector',
-        description: '基於 YOLOv8 與 Gradio 的雙階段電腦視覺推論系統，先過濾非鸚鵡畫面，再辨識太平洋鸚鵡的 13 種日常行為，支援 Web UI 與命令列操作。',
-        tags: ['Python', 'YOLOv8', 'Computer Vision', 'Gradio', 'PyTorch'],
-        links: [
-          { label: 'View Source', url: 'https://github.com/laura-chou/parrot-detection', isPrimary: true }
-        ]
-      },
-      {
-        name: 'Mineral RAG',
-        description: '基於 LLM 與 LangChain 的雙階段離線 RAG 系統，精準提取礦物專有名詞並檢索生成硬度、化學式等物理特性，支援 Streamlit 網頁與 CLI 介面。',
-        tags: ['Python', 'LangChain', 'RAG', 'LLM', 'Streamlit'],
-        links: [
-          { label: 'View Source', url: 'https://github.com/laura-chou/mineral-rag', isPrimary: true }
-        ]
-      }
-    ],
-
     tdd: [
       {
         name: '購物車系統 TDD',
@@ -443,16 +443,16 @@ export default function Home() {
 
   const tabsConfig = [
     {
-      value: 'fullstack',
-      label: '全端與網頁',
-      enLabel: 'Full-Stack & Web',
-      icon: faLaptopCode,
-    },
-    {
       value: 'aiot',
       label: 'AIoT 智慧應用',
       enLabel: 'AI & IoT / Python',
       icon: faMicrochip,
+    },
+    {
+      value: 'fullstack',
+      label: '全端與網頁',
+      enLabel: 'Full-Stack & Web',
+      icon: faLaptopCode,
     },
     {
       value: 'tdd',
@@ -583,7 +583,7 @@ export default function Home() {
         {/* Portfolio */}
         <section id="portfolio" className="scroll-mt-20 pb-20">
           <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">作品集</h2>
-          <Tabs.Root className="flex flex-col w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden" defaultValue="fullstack">
+          <Tabs.Root className="flex flex-col w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden" defaultValue="aiot">
             <Tabs.List className="flex border-b border-gray-100 bg-gray-50/50 overflow-x-auto no-scrollbar" aria-label="專案分類">
               {tabsConfig.map((tab) => (
                 <Tabs.Trigger
@@ -598,11 +598,11 @@ export default function Home() {
             </Tabs.List>
 
             <div className="p-6 sm:p-8 min-h-[300px]">
-              <Tabs.Content value="fullstack" className="outline-none animate-in fade-in duration-300">
-                <ProjectList projects={portfolioData.fullstack} />
-              </Tabs.Content>
               <Tabs.Content value="aiot" className="outline-none animate-in fade-in duration-300">
                 <ProjectList projects={portfolioData.aiot} />
+              </Tabs.Content>
+              <Tabs.Content value="fullstack" className="outline-none animate-in fade-in duration-300">
+                <ProjectList projects={portfolioData.fullstack} />
               </Tabs.Content>
               <Tabs.Content value="tdd" className="outline-none animate-in fade-in duration-300">
                 <ProjectList projects={portfolioData.tdd} />
