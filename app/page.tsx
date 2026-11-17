@@ -187,6 +187,14 @@ export default function Home() {
         links: [
           { label: 'View Source', url: 'https://github.com/laura-chou/mineral-rag', isPrimary: true }
         ]
+      },
+      {
+        name: 'ESP32 MCP Climate Control',
+        description: '智慧氣候控制系統：結合 ESP32、FastAPI 與本機 Ollama LLM 的邊緣自動化方案。支援標準 MCP 協議串接 Claude Desktop，並具備三層安全底線與規則引擎混合決策防護機制。',
+        tags: ['Python', 'ESP32', 'FastAPI', 'MCP', 'Ollama', 'IoT'],
+        links: [
+          { label: 'View Source', url: 'https://github.com/laura-chou/esp32-mcp-climate-control', isPrimary: true }
+        ]
       }
     ],
 
